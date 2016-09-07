@@ -1,0 +1,37 @@
+$light-text:white;
+$dark-text:black;
+$main-color:#777777;
+$secondary-color:#b31b1b;
+$light-background:white;
+$mid-background:#efefef;
+$dark-background:green;
+$menu-button-primary:white;
+$menu-button-secondary:$secondary-color;
+$menu-button-border:black;
+
+body {
+  background:$main-color;
+}
+
+#main-wrapper {
+  background:$light-background;
+}
+
+#header, #footer {
+  background:$secondary-color;
+  color:$light-text;
+}
+
+
+
+#sidebar {
+  background:$mid-background;
+}
+#toggle {
+    border:solid 1px $menu-button-border;
+    background: $menu-button-secondary;
+    color:$menu-button-primary;
+    a:visited {
+      color:$menu-button-primary;
+    }
+}

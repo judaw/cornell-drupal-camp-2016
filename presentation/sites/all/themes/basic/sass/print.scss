@@ -1,0 +1,12 @@
+.body {
+    width:80%;
+}
+#content {
+    width:100%;   
+}
+#sidebar, #admin-top, .breadcrumb, .workflow-current-state, form, .tabs, #toolbar, .field-name-field-video, .blackstripe, #header, #footer {
+    display:none;
+}
+.field-name-field-image {
+    max-width:40%;
+}

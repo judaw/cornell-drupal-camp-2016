@@ -1,0 +1,31 @@
+/* line 12, ../sass/color.scss */
+body {
+  background: #777777;
+}
+
+/* line 16, ../sass/color.scss */
+#main-wrapper {
+  background: white;
+}
+
+/* line 20, ../sass/color.scss */
+#header, #footer {
+  background: #b31b1b;
+  color: white;
+}
+
+/* line 27, ../sass/color.scss */
+#sidebar {
+  background: #efefef;
+}
+
+/* line 30, ../sass/color.scss */
+#toggle {
+  border: solid 1px black;
+  background: #b31b1b;
+  color: white;
+}
+/* line 34, ../sass/color.scss */
+#toggle a:visited {
+  color: white;
+}

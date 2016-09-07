@@ -1,0 +1,4 @@
+name =  Export Button (Views)
+description = Modifies view to add filters to an exports link/button
+core = 7.x
+package = Custom: Einaudi Center

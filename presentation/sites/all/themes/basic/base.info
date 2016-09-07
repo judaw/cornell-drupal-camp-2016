@@ -1,0 +1,18 @@
+name = Einaudi Center Base Theme
+description = Custom Base Theme for Einaudi and all subsites
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = css/sheet.css
+stylesheets[print][] = css/print.css
+scripts[] = js/jquery-3.1.0.min.js
+scripts[] = js/basic-theme.js
+
+regions[header] = Header
+regions[help] = Help
+regions[highlighted] = Highlighted
+regions[featured] = Featured
+regions[content] = Content
+regions[sidebar] = Sidebar
+regions[footer] = Footer

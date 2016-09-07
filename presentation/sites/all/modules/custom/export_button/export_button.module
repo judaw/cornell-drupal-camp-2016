@@ -1,0 +1,30 @@
+<?php
+/**
+*
+* Implements hook_views_pre_render
+*
+**/
+function export_button_views_pre_render(&$view) {
+  if($view->name == 'funding_data') {
+    $params = array();
+    foreach($view->exposed_raw_input as $key => $value) {
+      if(gettype($value) == 'array') {
+        foreach($value as $element => $element_value) {
+          array_push($params,$key."=".$element_value);
+        }
+      }
+      else
+        array_push($params,$key."=".$value);
+    }
+    if(!empty($params)) {
+      $url = 'export/funding-data?'.implode('&',$params);
+      if(substr_count($url,'type') > 0) {
+      $url = str_replace('type','type[]',$url);
+      }
+      if(substr_count($url,'field_status_value') > 0) {
+        $url = str_replace('field_status_value','field_status_value[]',$url);
+      }
+      $view->header['area']->options['content'] = "<a id='button' href='".$url."'>Export Data</a>";
+    }
+  }
+}

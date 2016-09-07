@@ -1,0 +1,19 @@
+/* line 1, ../sass/print.scss */
+.body {
+  width: 80%;
+}
+
+/* line 4, ../sass/print.scss */
+#content {
+  width: 100%;
+}
+
+/* line 7, ../sass/print.scss */
+#sidebar, #admin-top, .breadcrumb, .workflow-current-state, form, .tabs, #toolbar, .field-name-field-video, .blackstripe, #header, #footer {
+  display: none;
+}
+
+/* line 10, ../sass/print.scss */
+.field-name-field-image {
+  max-width: 40%;
+}

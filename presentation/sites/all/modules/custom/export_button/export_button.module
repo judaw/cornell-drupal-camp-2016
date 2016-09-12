@@ -1,11 +1,63 @@
 <?php
 /**
+* Implements hook_menu().
+*/
+function export_button_menu() {
+  $items = array();
+
+  $items['admin/config/export_button'] = array(
+    'title' => 'Custom Module: Export Button',
+    'description' => 'Configure views that need to alter the export button in header.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_export_button_configure_form'),
+    'access arguments' => array('administer_export_button'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+* Implements hook_permission().
+*/
+function export_button_permission() {
+    return array(
+        'administer_export_button' => array(
+            'title'=>t('Configure Export Button Module'),
+            'description'=>t('Allows user to configure export button module.'),
+        ),
+    );
+}
+
+/**
+* Implements hook_form().
+*/
+function _export_button_configure_form($form, &$form_state) {
+  $form['export_button_views'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Views With Data Export Button.'),
+    '#default_value' => variable_get('export_button_views', ''),
+    '#size' => 100,
+    '#maxlength' => 800,
+    '#description' => t('Enter a mapping list of View machine names and thier urls. One per line, entries as view|url. (Example: test_view|view/path/here)'),
+    '#required' => FALSE,
+  );
+  return system_settings_form($form);
+}
+
+/**
 *
 * Implements hook_views_pre_render
 *
 **/
 function export_button_views_pre_render(&$view) {
-  if($view->name == 'funding_data') {
+  $views_array = array();
+  $views_to_check = explode(PHP_EOL,trim(variable_get('export_button_views')));
+  foreach($views_to_check as $view_string) {
+    list($key, $value) = explode('|',$view_string);
+    $views_array[$key] = $value;
+  }
+
+  if(array_key_exists($view->name,$views_array)) {
     $params = array();
     foreach($view->exposed_raw_input as $key => $value) {
       if(gettype($value) == 'array') {
@@ -17,7 +69,7 @@ function export_button_views_pre_render(&$view) {
         array_push($params,$key."=".$value);
     }
     if(!empty($params)) {
-      $url = 'export/funding-data?'.implode('&',$params);
+      $url = $views_array[$views_name].'?'.implode('&',$params);
       if(substr_count($url,'type') > 0) {
       $url = str_replace('type','type[]',$url);
       }
@@ -25,6 +77,10 @@ function export_button_views_pre_render(&$view) {
         $url = str_replace('field_status_value','field_status_value[]',$url);
       }
       $view->header['area']->options['content'] = "<a id='button' href='".$url."'>Export Data</a>";
+    }
+    else {
+      #FOR TESTING
+      $view->header['area']->options['content'] = "THIS IS A TEST AND THERE IS NO EXPORT VIEW YET";
     }
   }
 }

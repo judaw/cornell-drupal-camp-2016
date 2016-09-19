@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Presentation: Funding Data Type A feature.
+ */
+
+include_once 'presentation_funding_data_type_a.features.inc';

@@ -69,13 +69,7 @@ function export_button_views_pre_render(&$view) {
         array_push($params,$key."=".$value);
     }
     if(!empty($params)) {
-      $url = $views_array[$views_name].'?'.implode('&',$params);
-      if(substr_count($url,'type') > 0) {
-      $url = str_replace('type','type[]',$url);
-      }
-      if(substr_count($url,'field_status_value') > 0) {
-        $url = str_replace('field_status_value','field_status_value[]',$url);
-      }
+      $url = $views_array[$view->name].'?'.implode('&',$params);
       $view->header['area']->options['content'] = "<a id='button' href='".$url."'>Export Data</a>";
     }
     else {
@@ -84,3 +78,11 @@ function export_button_views_pre_render(&$view) {
     }
   }
 }
+
+
+// if(substr_count($url,'type') > 0) {
+// $url = str_replace('type','type[]',$url);
+// }
+// if(substr_count($url,'field_status_value') > 0) {
+//   $url = str_replace('field_status_value','field_status_value[]',$url);
+// }
